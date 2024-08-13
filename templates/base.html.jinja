@@ -7,17 +7,13 @@
 </head>
 <body>
     <nav id="navBarOptions">
-        <a href="{{ url_for('listIndication') }}"> Indications</a>
-        <a href="{{ url_for('addCategory') }}"> Categories</a>
-        <a href="{{ url_for('addExam') }}"> Exams & Services</a>
-        <a href="{{ url_for('showCatalogue') }}"> Consult catalogue</a>
-        <a href="{{ url_for('showReport') }}"> See Report</a>
+        <a href="{{ url_for('indications') }}"> Indications</a>
     </nav>
     {% for message in get_flashed_messages()  %}
         <p style="color: red; font-weight: 600">{{ message }}</p>
     {% endfor %}
     <div class="contentMainBlock">
-        {% block contentMain %} {% endblock %}
+        {% block contentBase %} {% endblock %}
     </div>
 </body>
 </html>

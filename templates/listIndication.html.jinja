@@ -1,15 +1,15 @@
 {% extends 'base.html.jinja' %}
-{% block contentMain %}
+{% block contentBase %}
   <div id="infoIndic">
         <h1> {% block title %} Indication: {% endblock %}</h1>
         <a href="{{ url_for('addIndication') }}"> Add </a>
         <h3> Indication List: </h3>
   </div>
-  <div id="materiasListCont">
+  <div id="indicListCont">
         <ul>
             {% for x in indicaciones %}
                 <li> 
-                    <a href="/{{x._id}}">{{ x.codeIndic }}</a> 
+                    <p>{{ x.codeIndic }}</p> 
                     <p>{{x.description}} </p>
                     <a href="/modificar/{{x._id}}">Modificar</a> 
                     <a href="/delete/{{x._id}}">Eliminar</a> 
