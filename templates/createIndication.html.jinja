@@ -1,0 +1,15 @@
+{% extends 'base.html.jinja' %}
+{% block contentMain %}
+    <div class="createForm"> 
+        <h1> {% block title %} Add Indication {% endblock %}</h1>
+        <form method="POST">
+            <div>
+                <label for="indicationDescription">Description of this indication: </label><br>
+                <input type="string" name="indicationDescription" placeholder="Description here">
+                <br>
+            </div>
+            <input type="submit" value="Submit">
+            <input type="submit" value="Add">
+        </form>
+    </div>
+{% endblock %}
