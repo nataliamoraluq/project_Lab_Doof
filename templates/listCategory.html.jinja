@@ -3,7 +3,7 @@
   <div id="infoCateg">
         <h1> {% block title %} Category: {% endblock %}</h1>
         <a href="{{ url_for('addCategory') }}"> Add </a>
-        <h3> Indication List: </h3>
+        <h3> Categories List: </h3>
   </div>
   <div id="categListCont">
         <ul>
@@ -11,8 +11,8 @@
                 <li>
                     <p>{{ x.name }}</p> 
                     <p>{{x.description}} </p>
-                    <a href="/updateC/{{x._id}}">Modificar</a> 
-                    <a href="/deleteC/{{x._id}}">Eliminar</a> 
+                    <a href="/updateC/{{x._id}}">Update</a> 
+                    <a href="/deleteC/{{x._id}}">Delete</a> 
                 </li>
             {% endfor %}
         </ul>

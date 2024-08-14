@@ -5,20 +5,22 @@ from bson.objectid import ObjectId
 ##
 app = Flask(__name__, template_folder="./templates")
 
+# --- LIST ---
+
 #LIST - INDICATIONS
 @app.route("/indications", methods=["GET"])
 def indications():
     indicaciones = indicationCollection.find()
     return render_template("listIndication.html.jinja", indicaciones=indicaciones)
 
-#LIST - INDICATIONS
+#LIST - CATEGORIES
 @app.route("/categories", methods=["GET"])
 def categories():
     categorias = categoryCollection.find()
     return render_template("listCategory.html.jinja", categorias=categorias)
 
-
-## CREATE INDICATION
+# ---------------------------------- CRUD INDICATIONS -------------------------------
+## *** CREATE INDICATION ***
 @app.route("/", methods=["GET", "POST"])
 def addIndication():
     if request.method == "POST":
@@ -38,7 +40,7 @@ def addIndication():
         return render_template("listIndication.html.jinja", indicaciones=indicaciones)
     return render_template("createIndication.html.jinja")
 
-## UPDATE INDICATION
+## *** UPDATE INDICATION ***
 @app.route("/updateI/<id>", methods=["GET", "POST"])
 def updateIndication(id):
     oid = ObjectId(id)
@@ -53,7 +55,7 @@ def updateIndication(id):
         return redirect(url_for('indications'))
     return render_template("updateIndication.html.jinja", indicX=indication) 
 
-## DELETE INDICATION
+## *** DELETE INDICATION ***
 @app.route("/deleteI/<id>", methods=["GET"])
 def deleteIndication(id):
     oid = ObjectId(id)
@@ -61,29 +63,40 @@ def deleteIndication(id):
     indicaciones = indicationCollection.find()
     return render_template("listIndication.html.jinja", indicaciones=indicaciones)
 
-
+# ---------------------------------- CRUD CATEGORIES -------------------------------
 """
-{% for x in indicaciones %}
-                <li> 
-                    <p>{{ x.codeIndic }}</p> 
-                    <p>{{x.description}} </p>
-                    <a href="/modificar/{{x._id}}">Modificar</a> 
-                    <a href="/delete/{{x._id}}">Eliminar</a> 
-                </li>
-            {% endfor %}
+            <div>
+                <label for="categName">Category Name: </label><br>
+                <input type="string" name="categName" placeholder="Name here">
+                <br>
+            </div>
+            <div>
+                <label for="categDescription">Description of the category: </label><br>
+                <input type="string" name="categDescription" placeholder="Description here">
+                <br>
+            </div>
 """
-# CRUD INDICATIONS --
 
-"""<a href="{{ url_for('addIndication') }}"> Indications</a>
-        <a href="{{ url_for('addCategory') }}"> Categories</a>
-        <a href="{{ url_for('addExam') }}"> Exams & Services</a>
-        <a href="{{ url_for('showCatalogue') }}"> Consult catalogue</a>
-        <a href="{{ url_for('showReport') }}"> See Report</a>"""
+## *** CREATE INDICATION ***
+@app.route("/", methods=["GET", "POST"])
+def addCategory():
+    if request.method == "POST":
 
+        name = request.form['categName']
+        description = request.form['categDescription']
 
+        category = {
+            'name' : name,
+            'description' : description
+        }
 
-#LIST - CATEGORIES
-# CRUD CATEGORIES --
+        print("Category: ", category)
+
+        categoryCollection.insert_one(category)
+        categorias = categoryCollection.find()
+        return render_template("listCategory.html.jinja", categorias=categorias)
+    return render_template("createCategory.html.jinja")
+
 
 #LIST - EXAMS GENERAL
 # CRUD EXAMS --
@@ -97,8 +110,8 @@ if __name__ == "__main__":
 
 """
      <!--
-            <a href="{{ url_for('addCategory') }}"> Categories</a>
-            <a href="{{ url_for('addExam') }}"> Exams & Services</a>
+            <a href="{{ url_for('categories') }}"> Categories</a>
+            <a href="{{ url_for('exams') }}"> Exams & Services</a>
             <a href="{{ url_for('showCatalogue') }}"> Consult catalogue</a>
             <a href="{{ url_for('showReport') }}"> See Report</a>
         -->
