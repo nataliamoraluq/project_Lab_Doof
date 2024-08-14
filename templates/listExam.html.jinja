@@ -1,0 +1,18 @@
+{% extends 'base.html.jinja' %}
+{% block contentBase %}
+    <div id="infoExam">
+        <h1> {% block title %} Exam & Service: {% endblock %}</h1>
+        <a href="{{url_for('addExam')}}"> Add an exam </a>
+        <h3> Exams List: </h3>
+    </div>
+    <div id="examListCont">
+        <ul>
+            {% for e in examenes %}
+                <li>
+                    <p>{{e.name}}</p>
+                    <p>{{e.price}}</p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

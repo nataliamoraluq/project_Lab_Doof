@@ -19,6 +19,12 @@ def categories():
     categorias = categoryCollection.find()
     return render_template("listCategory.html.jinja", categorias=categorias)
 
+#LIST - EXAMS & SERVICES
+@app.route("/exams", methods=["GET"])
+def exams():
+    examenes = examServiceCollection.find()
+    return render_template("listExam.html.jinja", examenes=examenes)
+
 # ---------------------------------- CRUD INDICATIONS -------------------------------
 ## *** CREATE INDICATION ***
 @app.route("/", methods=["GET", "POST"])
@@ -64,7 +70,6 @@ def deleteIndication(id):
     return render_template("listIndication.html.jinja", indicaciones=indicaciones)
 
 # ---------------------------------- CRUD CATEGORIES -------------------------------"
-
 ## *** CREATE CATEGORY ***
 @app.route("/c", methods=["GET", "POST"])
 def addCategory():
@@ -85,7 +90,7 @@ def addCategory():
         return render_template("listCategory.html.jinja", categorias=categorias)
     return render_template("createCategory.html.jinja")
 
-## *** UPDATE INDICATION ***
+## *** UPDATE CATEGORY ***
 @app.route("/updateC/<id>", methods=["GET", "POST"])
 def updateCategory(id):
     oid = ObjectId(id)
@@ -100,7 +105,7 @@ def updateCategory(id):
         return redirect(url_for('categories'))
     return render_template("updateCategory.html.jinja", categX=category)
 
-## *** DELETE INDICATION ***
+## *** DELETE CATEGORY ***
 @app.route("/deleteC/<id>", methods=["GET"])
 def deleteCategory(id):
     oid = ObjectId(id)
@@ -108,10 +113,58 @@ def deleteCategory(id):
     categorias = categoryCollection.find()
     return render_template("listCategory.html.jinja", categorias=categorias)
 
-"""
+## ### ---- ###
+@app.route("/showCategOptions", methods=["GET"])
+def sendCategory():
+    categorias = categoryCollection.find()
+    indicaciones = indicationCollection.find()
+    return render_template("createExam.html.jinja", categorias=categorias, indicaciones=indicaciones)
 
-                    <a href="/updateC/{{x._id}}">Update</a> 
-                    <a href="/deleteC/{{x._id}}">Delete</a>
+@app.route("/e", methods=["GET", "POST"])
+def addExam():
+    listCat = categoryCollection.find()
+    listIndi = indicationCollection.find()
+    if request.method == "POST":
+
+        name = request.form['examCode']
+        categoriesX = request.form['categories']
+        typeOfSample = request.form['typeOfSample']
+        price = request.form['priceExam']
+        indicationX = request.form['indications']
+
+        exam = {
+            'name' : name,
+            'categoriesX' : categoriesX,
+            'typeOfSample' : typeOfSample,
+            'price' : price,
+            'indicationX' : indicationX
+        }
+
+        print("Exam: ", exam)
+
+        examServiceCollection.insert_one(exam)
+        examenes = examServiceCollection.find()
+        return render_template("listExam.html.jinja", examenes=examenes)
+    return render_template("createExam.html.jinja", categoriasList=listCat, indicacionesList=listIndi)
+
+
+"""
+    <div id="infoExam">
+        <h1> {% block title %} Exam & Service: {% endblock %}</h1>
+        <a href="{{url_for('addExam')}}"> Add an exam </a>
+        <h3> Exams List: </h3>
+    </div>
+    <div id="examListCont">
+        <ul>
+            {% for e in examenes %}
+                <li>
+                    <p>{{e.code}}</p>
+                    <a href="/updateC/{{c._id}}">Update</a>
+                    <a href="/deleteC/{{c._id}}">Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 """
 #LIST - EXAMS GENERAL
 # CRUD EXAMS --
