@@ -63,21 +63,9 @@ def deleteIndication(id):
     indicaciones = indicationCollection.find()
     return render_template("listIndication.html.jinja", indicaciones=indicaciones)
 
-# ---------------------------------- CRUD CATEGORIES -------------------------------
-"""
-            <div>
-                <label for="categName">Category Name: </label><br>
-                <input type="string" name="categName" placeholder="Name here">
-                <br>
-            </div>
-            <div>
-                <label for="categDescription">Description of the category: </label><br>
-                <input type="string" name="categDescription" placeholder="Description here">
-                <br>
-            </div>
-"""
+# ---------------------------------- CRUD CATEGORIES -------------------------------"
 
-## *** CREATE INDICATION ***
+## *** CREATE CATEGORY ***
 @app.route("/", methods=["GET", "POST"])
 def addCategory():
     if request.method == "POST":
@@ -97,7 +85,11 @@ def addCategory():
         return render_template("listCategory.html.jinja", categorias=categorias)
     return render_template("createCategory.html.jinja")
 
+"""
 
+                    <a href="/updateC/{{x._id}}">Update</a> 
+                    <a href="/deleteC/{{x._id}}">Delete</a>
+"""
 #LIST - EXAMS GENERAL
 # CRUD EXAMS --
 

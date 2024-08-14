@@ -7,12 +7,10 @@
   </div>
   <div id="categListCont">
         <ul>
-            {% for x in categorias %}
+            {% for c in categorias %}
                 <li>
-                    <p>{{ x.name }}</p> 
-                    <p>{{x.description}} </p>
-                    <a href="/updateC/{{x._id}}">Update</a> 
-                    <a href="/deleteC/{{x._id}}">Delete</a> 
+                    <p>{{c.name}}</p> 
+                    <p>{{c.description}} </p>
                 </li>
             {% endfor %}
         </ul>
