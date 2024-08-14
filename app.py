@@ -21,7 +21,7 @@ def categories():
 
 # ---------------------------------- CRUD INDICATIONS -------------------------------
 ## *** CREATE INDICATION ***
-@app.route("/", methods=["GET", "POST"])
+@app.route("/in", methods=["GET", "POST"])
 def addIndication():
     if request.method == "POST":
 
@@ -66,7 +66,7 @@ def deleteIndication(id):
 # ---------------------------------- CRUD CATEGORIES -------------------------------"
 
 ## *** CREATE CATEGORY ***
-@app.route("/", methods=["GET", "POST"])
+@app.route("/c", methods=["GET", "POST"])
 def addCategory():
     if request.method == "POST":
 
