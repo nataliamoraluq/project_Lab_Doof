@@ -1,6 +1,15 @@
 /* CSS MANUAL SOLO PROVISIONAL!! - MOMENTANEO MIENTRAS SE IMPORTAN LAS LIBRERIAS DE CSS*/
 a{
     text-decoration: none;
+    width: 55%;
+    height: 2.2em;
+    padding: 1.08rem;
+    font-size: 1.15em;
+    font-weight: bold;
+    background-color: rgb(163, 191, 251);
+    border: 3px;
+    border-radius: 67vmax;
+    align-content: center;
 }
 
 form{
@@ -57,7 +66,7 @@ form{
     margin: 2em;
 }
 
-#navIndic{
+/*#navIndic{
     width: 55%;
     height: 2.2em;
     padding: 1.08rem;
@@ -65,11 +74,11 @@ form{
     font-weight: bold;
     background-color: rgb(152, 178, 233);
     border: 3px rgb(168, 130, 191);
-    border-radius: 90vmax;
+    border-radius: 67vmax;
+    align-content: center;
     /*margin-top: 2em;*/
     /*position: center;*/ 
     /*bottom: 20%;
     right: 20%;*/
-    align-content: center;
-    /*text-decoration: none;*/
-}
+    /*text-decoration: none;
+}*/
