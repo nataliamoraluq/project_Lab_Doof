@@ -1,11 +1,11 @@
 {% extends 'base.html.jinja' %}
 {% block contentBase %}
-  <div id="infoCateg">
+    <div id="infoCateg">
         <h1> {% block title %} Category: {% endblock %}</h1>
         <a href="{{ url_for('addCategory') }}"> Add </a>
         <h3> Categories List: </h3>
-  </div>
-  <div id="categListCont">
+    </div>
+    <div id="categListCont">
         <ul>
             {% for c in categorias %}
                 <li>
@@ -14,5 +14,5 @@
                 </li>
             {% endfor %}
         </ul>
-  </div>
+    </div>
 {% endblock %}
