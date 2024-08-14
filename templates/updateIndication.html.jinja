@@ -1,0 +1,19 @@
+{% extends 'base.html.jinja' %}
+{% block contentBase %}
+    <div class="createForm"> 
+        <h1> {% block title %} Update Indication {% endblock %}</h1>
+        <form method="POST">
+            <div>
+                <label for="indicationCode">Indication Code: </label><br>
+                <input type="string" name="indicationCode" placeholder="Code here" value="{{indicX.codeIndic}}">
+                <br>
+            </div>
+            <div>
+                <label for="indicationDescription">Description of this indication: </label><br>
+                <input type="string" name="indicationDescription" placeholder="Description here" value="{{indicX.description}}">
+                <br>
+            </div>
+            <input type="submit" value="Add">
+        </form>
+    </div>
+{% endblock %}

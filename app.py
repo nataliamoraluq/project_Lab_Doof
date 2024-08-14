@@ -5,8 +5,6 @@ from bson.objectid import ObjectId
 ##
 app = Flask(__name__, template_folder="./templates")
 
-
-
 #LIST - INDICATIONS
 @app.route("/indications", methods=["GET"])
 def indications():
@@ -17,29 +15,6 @@ def indications():
 @app.route("/", methods=["GET", "POST"])
 def addIndication():
     if request.method == "POST":
-
-        """
-            {{el._id}}  -----> m._id
-                {{el.nombre}}  -----> m.nombreProf
-                -----> m.apellidoProf
-                -----> m.idProf
-                -----> m.nombreM
-                -----> m.objetM
-                -----> m.duracion
-                -----> m.notaMin
-
-                <div>
-                <label for="indicationCode">Indication Code: </label><br>
-                <input type="string" name="indicationCode" placeholder="Code here">
-                <br>
-            </div>
-            <div>
-                <label for="indicationDescription">Description of this indication: </label><br>
-                <input type="string" name="indicationDescription" placeholder="Description here">
-                <br>
-            </div>
-                
-        """
 
         codeIndic = request.form['indicationCode']
         description = request.form['indicationDescription']
@@ -56,28 +31,24 @@ def addIndication():
         return render_template("listIndication.html.jinja", indicaciones=indicaciones)
     return render_template("createIndication.html.jinja")
 
-## UPDATE
-"""@app.route("/modificar/<id>", methods=["GET", "POST"])
-def updateElement(id):
+## UPDATE INDICATION
+@app.route("/update/<id>", methods=["GET", "POST"])
+def updateIndication(id):
     oid = ObjectId(id)
-    materia = collection.find_one({'_id': oid})
+    indication = indicationCollection.find_one({'_id': oid})
     if request.method == "POST":
-        new_materia = request.form
-        materia = collection.replace_one({'_id': oid},
+        new_indication = request.form
+        indication = indicationCollection.replace_one({'_id': oid},
                                         {
-                                            'nombreProf' : new_materia['teacherFirstName'],
-                                            'apellidoProf' : new_materia['teacherLastName'],
-                                            'idProf' : new_materia['teacherId'],
-                                            'nombreM' : new_materia['subjectName'],
-                                            'objetM' : new_materia['subjectPurpose'],
-                                            'duracion' : new_materia['durationSubject'],
-                                            'notaMin' : new_materia['minimumPassingGrade'],
+                                            'codeIndic' : new_indication['indicationCode'],
+                                            'description' : new_indication['indicationDescription'],
                                         })
-        return redirect(url_for('subjects'))
-    return render_template("updateSubject.html.jinja", subjectX=materia) """
-## DELETE
+        return redirect(url_for('indications'))
+    return render_template("updateIndication.html.jinja", indicX=indication) 
+
+## DELETE INDICATION
 @app.route("/delete/<id>", methods=["GET"])
-def deleteElement(id):
+def deleteIndication(id):
     oid = ObjectId(id)
     indicationCollection.delete_one({'_id': oid})
     indicaciones = indicationCollection.find()

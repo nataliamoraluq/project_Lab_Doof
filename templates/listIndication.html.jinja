@@ -8,10 +8,10 @@
   <div id="indicListCont">
         <ul>
             {% for x in indicaciones %}
-                <li> 
+                <li>
                     <p>{{ x.codeIndic }}</p> 
                     <p>{{x.description}} </p>
-                    <a href="/modificar/{{x._id}}">Modificar</a> 
+                    <a href="/update/{{x._id}}">Modificar</a> 
                     <a href="/delete/{{x._id}}">Eliminar</a> 
                 </li>
             {% endfor %}
