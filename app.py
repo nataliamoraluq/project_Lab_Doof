@@ -11,6 +11,13 @@ def indications():
     indicaciones = indicationCollection.find()
     return render_template("listIndication.html.jinja", indicaciones=indicaciones)
 
+#LIST - INDICATIONS
+@app.route("/categories", methods=["GET"])
+def categories():
+    categorias = categoryCollection.find()
+    return render_template("listCategory.html.jinja", categorias=categorias)
+
+
 ## CREATE INDICATION
 @app.route("/", methods=["GET", "POST"])
 def addIndication():
@@ -32,7 +39,7 @@ def addIndication():
     return render_template("createIndication.html.jinja")
 
 ## UPDATE INDICATION
-@app.route("/update/<id>", methods=["GET", "POST"])
+@app.route("/updateI/<id>", methods=["GET", "POST"])
 def updateIndication(id):
     oid = ObjectId(id)
     indication = indicationCollection.find_one({'_id': oid})
@@ -47,7 +54,7 @@ def updateIndication(id):
     return render_template("updateIndication.html.jinja", indicX=indication) 
 
 ## DELETE INDICATION
-@app.route("/delete/<id>", methods=["GET"])
+@app.route("/deleteI/<id>", methods=["GET"])
 def deleteIndication(id):
     oid = ObjectId(id)
     indicationCollection.delete_one({'_id': oid})
