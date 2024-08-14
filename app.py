@@ -21,7 +21,7 @@ def categories():
 
 # ---------------------------------- CRUD INDICATIONS -------------------------------
 ## *** CREATE INDICATION ***
-@app.route("/in", methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])
 def addIndication():
     if request.method == "POST":
 
@@ -84,6 +84,29 @@ def addCategory():
         categorias = categoryCollection.find()
         return render_template("listCategory.html.jinja", categorias=categorias)
     return render_template("createCategory.html.jinja")
+
+## *** UPDATE INDICATION ***
+@app.route("/updateC/<id>", methods=["GET", "POST"])
+def updateCategory(id):
+    oid = ObjectId(id)
+    category = categoryCollection.find_one({'_id': oid})
+    if request.method == "POST":
+        new_category = request.form
+        category = categoryCollection.replace_one({'_id': oid},
+                                        {
+                                            'name' : new_category['categName'],
+                                            'description' : new_category['categDescription'],
+                                        })
+        return redirect(url_for('categories'))
+    return render_template("updateCategory.html.jinja", categX=category)
+
+## *** DELETE INDICATION ***
+@app.route("/deleteC/<id>", methods=["GET"])
+def deleteCategory(id):
+    oid = ObjectId(id)
+    categoryCollection.delete_one({'_id': oid})
+    categorias = categoryCollection.find()
+    return render_template("listCategory.html.jinja", categorias=categorias)
 
 """
 

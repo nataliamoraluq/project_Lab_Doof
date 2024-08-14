@@ -1,19 +1,19 @@
 {% extends 'base.html.jinja' %}
 {% block contentBase %}
-    <div class="createFormCat"> 
-        <h1> {% block title %} Add Category: {% endblock %}</h1>
+    <div class="updateFormCateg"> 
+        <h1> {% block title %} Update Category: {% endblock %}</h1>
         <form method="POST">
             <div>
                 <label for="categName">Category Name: </label><br>
-                <input type="string" name="categName" placeholder="Name here">
+                <input type="string" name="categName" placeholder="Name here" value="{{categX.name}}">
                 <br>
             </div>
             <div>
                 <label for="categDescription">Description of the category: </label><br>
-                <input type="string" name="categDescription" placeholder="Description here">
+                <input type="string" name="categDescription" placeholder="Description here" value="{{categX.description}}">
                 <br>
             </div>
-            <input id="btnAddC" type="submit" value="Add">
+            <input id="btnUpdateC" type="submit" value="Update">
         </form>
     </div>
 {% endblock %}
