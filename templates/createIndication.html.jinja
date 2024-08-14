@@ -1,6 +1,6 @@
 {% extends 'base.html.jinja' %}
 {% block contentBase %}
-    <div class="createForm"> 
+    <div class="createFormIndic"> 
         <h1> {% block title %} Add Indication {% endblock %}</h1>
         <form method="POST">
             <div>
@@ -13,7 +13,7 @@
                 <input type="string" name="indicationDescription" placeholder="Description here">
                 <br>
             </div>
-            <input type="submit" value="Add">
+            <input id="btnAdd" type="submit" value="Add">
         </form>
     </div>
 {% endblock %}

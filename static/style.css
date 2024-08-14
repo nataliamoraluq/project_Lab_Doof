@@ -1,0 +1,40 @@
+.createFormIndic{
+    background-color: rgb(195, 195, 219);
+    border-radius: 1.7em;
+    height: 5%m;
+    width: 20%;
+    padding: 1em;
+    margin: 1em;
+    border: 1.2em;
+    /*display: flex;
+    justify-content: center;*/
+    align-items: center;
+}
+
+.updateFormIndic{
+    background-color: rgb(203, 203, 222);
+    border-radius: 1.7em;
+    height: 5%m;
+    width: 20%;
+    padding: 1em;
+    margin: 1em;
+    border: 1.2em;
+}
+
+#btnAdd{
+    width: 50%;
+    height: 2em;
+    font-size: 1.15rem;
+    font-weight: bold;
+    background-color: rgb(220, 179, 246);
+    border: 3px rgb(168, 130, 191);
+    border-radius: 90vmax;
+    margin-top: 4%;
+    margin-bottom: 14.3%;
+    margin-left: 138px;
+    margin-right: 129px;
+    /* position: relative; */
+    bottom: 20%;
+    right: 20%;
+    align-content: center;
+}
