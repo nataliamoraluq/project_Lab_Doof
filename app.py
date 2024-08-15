@@ -121,6 +121,7 @@ def sendCategory():
     return render_template("createExam.html.jinja", categorias=categorias, indicaciones=indicaciones)
 
 # ---------------------------------- CRUD EXAM & SERVICES -------------------------------"
+## *** ADD EXAM ***
 @app.route("/e", methods=["GET", "POST"])
 def addExam():
     listCat = categoryCollection.find()
@@ -148,7 +149,8 @@ def addExam():
         return render_template("listExam.html.jinja", examenes=examenes)
     return render_template("createExam.html.jinja", categoriasList=listCat, indicacionesList=listIndi)
 
-## *** UPDATE CATEGORY ***
+## *** UPDATE EXAM ***
+"""
 @app.route("/updateE/<id>", methods=["GET", "POST"])
 def updateExam(id):
     listCat = categoryCollection.find()
@@ -160,13 +162,13 @@ def updateExam(id):
         exam = examServiceCollection.replace_one({'_id': oid},
                                         {
                                             'name' : new_exam['examCode'],
-                                            'categoriesX' : new_exam['categories'],
                                             'typeOfSample' : new_exam['typeOfSample'],
                                             'price' : new_exam['priceExam'],
-                                            'indicationX' : new_exam['indications'],
                                         })
         return redirect(url_for('exams'))
+        #'categoriesX' : new_exam['categories'], 'indicationX' : new_exam['indications'],
     return render_template("updateExam.html.jinja", examX=exam, categoriasList=listCat, indicacionesList=listIndi)
+"""
 
 
 ##OJO!! PROBAR Y CORREGIR ESTO: EN EL UPDATEEXAM.HTML
@@ -175,7 +177,7 @@ def updateExam(id):
             <select name="categories" id="categoryOptions">
                 {% for c in categoriasList %}
                     {%if c.name.value=={{examX.categoryX.value}}%}
-                        <option value="{{c.name}}"> {{c.name}}</option>
+                        <option value="{{c.name}}".selected> {{c.name}}</option>
                     {%endif%}
                 {% endfor %}
             </select>
@@ -196,6 +198,16 @@ def updateExam(id):
                 {% endfor %}
             </select>
 """
+
+## *** DELETE EXAM ***
+@app.route("/deleteS/<id>", methods=["GET"])
+def deleteExam(id):
+    oid = ObjectId(id)
+    examServiceCollection.delete_one({'_id': oid})
+    examenes = examServiceCollection.find()
+    return render_template("listExam.html.jinja", examenes=examenes)
+
+
 """
     <div id="infoExam">
         <h1> {% block title %} Exam & Service: {% endblock %}</h1>

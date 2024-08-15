@@ -5,18 +5,18 @@
         <form method="POST">
             <div>
                 <label for="examCode">Exam & Service Code: </label><br>
-                <input type="string" name="examCode" placeholder="Code here" value={{}}>
+                <input type="string" name="examCode" placeholder="Code here" value={{examX.name}}>
                 <br>
             </div>
             <label for="category">Category: </label><br>
             <div>
                 <label for="typeOfSample">Sample type: </label><br>
-                <input type="string" name="typeOfSample" placeholder="Type of sample here">
+                <input type="string" name="typeOfSample" placeholder="Type of sample here" value={{examX.typeOfSample}}>
                 <br>
             </div>
             <div>
                 <label for="priceExam">Type of sample: </label><br>
-                <input type="string" name="priceExam" placeholder="Price "in Bs" ">
+                <input type="string" name="priceExam" placeholder="Price "in Bs" value={{examX.price}}">
                 <br>
             </div>
             <label for="indication"> Indication: </label><br>
