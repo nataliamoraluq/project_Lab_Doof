@@ -150,8 +150,7 @@ def addExam():
     return render_template("createExam.html.jinja", categoriasList=listCat, indicacionesList=listIndi)
 
 ## *** UPDATE EXAM ***
-"""
-@app.route("/updateE/<id>", methods=["GET", "POST"])
+@app.route("/updateS/<id>", methods=["GET", "POST"])
 def updateExam(id):
     listCat = categoryCollection.find()
     listIndi = indicationCollection.find()
@@ -168,7 +167,7 @@ def updateExam(id):
         return redirect(url_for('exams'))
         #'categoriesX' : new_exam['categories'], 'indicationX' : new_exam['indications'],
     return render_template("updateExam.html.jinja", examX=exam, categoriasList=listCat, indicacionesList=listIndi)
-"""
+
 
 
 ##OJO!! PROBAR Y CORREGIR ESTO: EN EL UPDATEEXAM.HTML

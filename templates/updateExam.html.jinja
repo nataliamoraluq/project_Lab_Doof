@@ -9,6 +9,11 @@
                 <br>
             </div>
             <label for="category">Category: </label><br>
+            <select name="categories" id="categoryOptions">
+                {% for c in categoriasList %}
+                    <option value="{{c.name}}"> {{c.name}}</option>
+                {% endfor %}
+            </select>
             <div>
                 <label for="typeOfSample">Sample type: </label><br>
                 <input type="string" name="typeOfSample" placeholder="Type of sample here" value={{examX.typeOfSample}}>
@@ -20,6 +25,11 @@
                 <br>
             </div>
             <label for="indication"> Indication: </label><br>
+            <select name="indications" id="indicationOptions">
+                {% for indiX in indicacionesList %}
+                    <option value="{{indiX.codeIndic}}"> {{indiX.codeIndic}}</option>
+                {% endfor %}
+            </select>
             <input id="btnUpdateE" type="submit" value="Update">
         </form>
     </div>
