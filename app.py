@@ -69,7 +69,7 @@ def deleteIndication(id):
     indicaciones = indicationCollection.find()
     return render_template("listIndication.html.jinja", indicaciones=indicaciones)
 
-# ---------------------------------- CRUD CATEGORIES -------------------------------"
+# -------------------------------- CRUD CATEGORIES -------------------------------"
 ## *** CREATE CATEGORY ***
 @app.route("/c", methods=["GET", "POST"])
 def addCategory():
@@ -120,6 +120,7 @@ def sendCategory():
     indicaciones = indicationCollection.find()
     return render_template("createExam.html.jinja", categorias=categorias, indicaciones=indicaciones)
 
+# ---------------------------------- CRUD EXAM & SERVICES -------------------------------"
 @app.route("/e", methods=["GET", "POST"])
 def addExam():
     listCat = categoryCollection.find()
@@ -147,7 +148,54 @@ def addExam():
         return render_template("listExam.html.jinja", examenes=examenes)
     return render_template("createExam.html.jinja", categoriasList=listCat, indicacionesList=listIndi)
 
+## *** UPDATE CATEGORY ***
+@app.route("/updateE/<id>", methods=["GET", "POST"])
+def updateExam(id):
+    listCat = categoryCollection.find()
+    listIndi = indicationCollection.find()
+    oid = ObjectId(id)
+    exam = examServiceCollection.find_one({'_id': oid})
+    if request.method == "POST":
+        new_exam = request.form
+        exam = examServiceCollection.replace_one({'_id': oid},
+                                        {
+                                            'name' : new_exam['examCode'],
+                                            'categoriesX' : new_exam['categories'],
+                                            'typeOfSample' : new_exam['typeOfSample'],
+                                            'price' : new_exam['priceExam'],
+                                            'indicationX' : new_exam['indications'],
+                                        })
+        return redirect(url_for('exams'))
+    return render_template("updateExam.html.jinja", examX=exam, categoriasList=listCat, indicacionesList=listIndi)
 
+
+##OJO!! PROBAR Y CORREGIR ESTO: EN EL UPDATEEXAM.HTML
+
+"""
+            <select name="categories" id="categoryOptions">
+                {% for c in categoriasList %}
+                    {%if c.name.value=={{examX.categoryX.value}}%}
+                        <option value="{{c.name}}"> {{c.name}}</option>
+                    {%endif%}
+                {% endfor %}
+            </select>
+            <div>
+                <label for="typeOfSample">Sample type: </label><br>
+                <input type="string" name="typeOfSample" placeholder="Type of sample here">
+                <br>
+            </div>
+            <div>
+                <label for="priceExam">Type of sample: </label><br>
+                <input type="string" name="priceExam" placeholder="Price "in Bs" ">
+                <br>
+            </div>
+            <label for="indication"> Indication: </label><br>
+            <select name="indications" id="indicationOptions">
+                {% for indiX in indicacionesList %}
+                    <option value="{{indiX.codeIndic}}"> {{indiX.codeIndic}}</option>
+                {% endfor %}
+            </select>
+"""
 """
     <div id="infoExam">
         <h1> {% block title %} Exam & Service: {% endblock %}</h1>

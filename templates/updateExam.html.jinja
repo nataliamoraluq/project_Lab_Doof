@@ -1,0 +1,26 @@
+{% extends 'base.html.jinja' %}
+{% block contentBase %}
+    <div class="updateFormExam"> 
+        <h1> {% block title %} Update Exam & Service: {% endblock %}</h1>
+        <form method="POST">
+            <div>
+                <label for="examCode">Exam & Service Code: </label><br>
+                <input type="string" name="examCode" placeholder="Code here" value={{}}>
+                <br>
+            </div>
+            <label for="category">Category: </label><br>
+            <div>
+                <label for="typeOfSample">Sample type: </label><br>
+                <input type="string" name="typeOfSample" placeholder="Type of sample here">
+                <br>
+            </div>
+            <div>
+                <label for="priceExam">Type of sample: </label><br>
+                <input type="string" name="priceExam" placeholder="Price "in Bs" ">
+                <br>
+            </div>
+            <label for="indication"> Indication: </label><br>
+            <input id="btnUpdateE" type="submit" value="Update">
+        </form>
+    </div>
+{% endblock %}
