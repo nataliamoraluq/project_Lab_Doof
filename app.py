@@ -6,8 +6,7 @@ from bson.objectid import ObjectId
 app = Flask(__name__, template_folder="./templates")
 
 # --- LIST ---
-examsByCategory = [] # filtered by
-examsBySample = [] # filtered by
+examFiltList = [] #filtered list
 
 #LIST - INDICATIONS
 @app.route("/indications", methods=["GET"])
@@ -112,14 +111,6 @@ def deleteCategory(id):
     categoryCollection.delete_one({'_id': oid})
     categorias = categoryCollection.find()
     return render_template("listCategory.html.jinja", categorias=categorias)
-
-## ### ---- ###
-@app.route("/filter", methods=["GET"])
-def filterExam():
-    categorias = categoryCollection.find()
-    indicaciones = indicationCollection.find()
-    #return render_template("createExam.html.jinja", categorias=categorias, indicaciones=indicaciones)
-
 # ---------------------------------- CRUD EXAM & SERVICES -------------------------------"
 ## *** ADD EXAM ***
 @app.route("/e", methods=["GET", "POST"])
@@ -176,25 +167,26 @@ def deleteExam(id):
     examenes = examServiceCollection.find()
     return render_template("listExam.html.jinja", examenes=examenes)
 
+## ### ---- ###
+@app.route("/filter", methods=["GET"])
+def showCatalogue():
+    categories = categoryCollection.find()
+    catfilter = request.args.get('categoryFilter')
+    samplefilter = request.args.get('sampleFilter')
+    #
+    if catfilter:
+        examFiltList = examServiceCollection.find({'categoriesX': catfilter})
+    else:
+        examFiltList = examServiceCollection.find()
+    #
+    if samplefilter:
+        examFiltList = [exam for exam in examFiltList if exam['typeOfSample'] == samplefilter]
 
-"""
-    <div id="infoExam">
-        <h1> {% block title %} Exam & Service: {% endblock %}</h1>
-        <a href="{{url_for('addExam')}}"> Add an exam </a>
-        <h3> Exams List: </h3>
-    </div>
-    <div id="examListCont">
-        <ul>
-            {% for e in examenes %}
-                <li>
-                    <p>{{e.code}}</p>
-                    <a href="/updateC/{{c._id}}">Update</a>
-                    <a href="/deleteC/{{c._id}}">Delete</a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-"""
+    return render_template("catalogueExam.html.jinja", categorias=categories, exams=examFiltList)
+
+#<a href="/updateS/{{filtered._id}}">Consult this</a>
+
+
 #LIST - EXAMS GENERAL
 # CRUD EXAMS --
 

@@ -1,40 +1,37 @@
 {%extends 'base.html.jinja'%}
 {%block contentBase%}
    <h1>{% block title %} Exams & Services Catalogue: {% endblock %}</h1>
-   <form id="filterOptions">
-      <label> Filter By: </label>
-      <label> Options type1: </label>
-      <select name="options1">
-         <option value="option1"> Opt 1</option>
-         <option value="option2"> Opt 2</option>
-         <option value="option3"> Opt 3</option>
+   <div id="filterOptions">
+      <h4> Filter By: </h4>
+      <label> Category:</label>
+      <select name="categoryFilter">
+         {% for c in categorias %}
+            <option value="{{c.name}}"> {{c.name}}</option>
+         {%endfor%}
       </select>
-      <label> Options type2: </label>
-      <select name="options2">
-         <option value="option4"> Opt 1</option>
-         <option value="option5"> Opt 2</option>
-         <option value="option6"> Opt 3</option>
-      </select>
-      <input id="option1" type="submit" value="Filter">
-   </form>
+      <label> Sample type:</label>
+      <input type="string" name="sampleFilter" placeholder="Sample type">
+      <input id="btnFilter" type="submit" value="Filter">
+   </div>
    <table style="width:100%">
       <tr>
          <th>Exam Code</th>
          <th>Exam Name</th>
          <th>Sample type</th>
          <th>Price (Bs)</th>
+         <th>Consult here</th>
       </tr>
-      <tr name="row1">
-         <td>Value1</td>
-         <td>Value2</td>
-         <td>Value3</td>
-         <td>Value4</td>
-      </tr>
-      <tr name="row2">
-         <td>Value1</td>
-         <td>Value2</td>
-         <td>Value3</td>
-         <td>Value4</td>
-      </tr>
+      {%for filtered in exams%}
+         <tr name="row1">
+            <td>{{filtered.codeExam}}</td>
+            <td>{{filtered.name}}</td>
+            <td>{{filtered.typeOfSample}}</td>
+            <td>{{filtered.price}}</td>
+            <td>
+               <a href="/updateS/{{filtered._id}}">Update</a>
+               <a href="/deleteS/{{filtered._id}}">Delete</a>
+            </td>
+         </tr>
+      {%endfor%}
    </table>
 {%endblock%}

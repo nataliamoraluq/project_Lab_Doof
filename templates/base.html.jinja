@@ -11,6 +11,7 @@
         <a id="navIndic" href="{{ url_for('indications') }}"> Indications</a>
         <a href="{{url_for('categories')}}"> Categories</a> 
         <a href="{{url_for('exams')}}"> Exams & Services</a>
+        <a href="{{url_for('showCatalogue')}}"> See Catalogue</a>
     </nav>
     {% for message in get_flashed_messages()  %}
         <p style="color: red; font-weight: 600">{{ message }}</p>

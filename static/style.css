@@ -2,8 +2,8 @@
 a{
     text-decoration: none;
     width: 55%;
-    height: 2.2em;
-    padding: 1.08rem;
+    height: 2em;
+    padding: 1rem;
     font-size: 1.15em;
     font-weight: bold;
     background-color: rgb(163, 191, 251);
@@ -17,9 +17,6 @@ form{
     /*justify-content: center;*/
     flex-direction: column;
     align-items: center;
-}
-
-form{
     background-color: rgb(195, 195, 219);
     border-radius: 1.7em;
     height: 5%m;
@@ -31,6 +28,24 @@ form{
     justify-content: center;*/
     align-items: center;
     align-content: center;
+}
+
+table, th, td {
+    border:1px solid black;
+}
+
+#filterOptions{
+    background-color: rgb(197, 197, 197);
+    display: flex;
+    width: 80%;
+    height: 4vmax;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+h4{
+    margin: 0%;
 }
 
 .updateFormIndic{
