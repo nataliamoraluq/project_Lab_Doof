@@ -9,7 +9,9 @@
         <ul>
             {% for e in examenes %}
                 <li>
+                    <p>{{e.codeExam}}</p>
                     <p>{{e.name}}</p>
+                    <p>{{e.typeOfSample}}</p>
                     <p>{{e.price}}</p>
                     <a href="/updateS/{{e._id}}">Update</a>
                     <a href="/deleteS/{{e._id}}">Delete</a>

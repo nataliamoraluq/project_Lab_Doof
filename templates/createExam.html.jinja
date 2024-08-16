@@ -8,6 +8,11 @@
                 <input type="string" name="examCode" placeholder="Code here">
                 <br>
             </div>
+            <div>
+                <label for="examName">Exam Name: </label><br>
+                <input type="string" name="examName" placeholder="Name in here">
+                <br>
+            </div>
             <label for="category">Category: </label><br>
             <select name="categories" id="categoryOptions">
                 {% for c in categoriasList %}
@@ -27,7 +32,7 @@
             <label for="indication"> Indication: </label><br>
             <select name="indications" id="indicationOptions">
                 {% for indiX in indicacionesList %}
-                    <option value="{{indiX.codeIndic}}"> {{indiX.codeIndic}}</option>
+                    <option value="{{indiX.description}}"> {{indiX.codeIndic}}</option>
                 {% endfor %}
             </select>
             <input id="btnAddE" type="submit" value="Add">

@@ -1,0 +1,40 @@
+{%extends 'base.html.jinja'%}
+{%block contentBase%}
+   <h1>{% block title %} Exams & Services Catalogue: {% endblock %}</h1>
+   <form id="filterOptions">
+      <label> Filter By: </label>
+      <label> Options type1: </label>
+      <select name="options1">
+         <option value="option1"> Opt 1</option>
+         <option value="option2"> Opt 2</option>
+         <option value="option3"> Opt 3</option>
+      </select>
+      <label> Options type2: </label>
+      <select name="options2">
+         <option value="option4"> Opt 1</option>
+         <option value="option5"> Opt 2</option>
+         <option value="option6"> Opt 3</option>
+      </select>
+      <input id="option1" type="submit" value="Filter">
+   </form>
+   <table style="width:100%">
+      <tr>
+         <th>Exam Code</th>
+         <th>Exam Name</th>
+         <th>Sample type</th>
+         <th>Price (Bs)</th>
+      </tr>
+      <tr name="row1">
+         <td>Value1</td>
+         <td>Value2</td>
+         <td>Value3</td>
+         <td>Value4</td>
+      </tr>
+      <tr name="row2">
+         <td>Value1</td>
+         <td>Value2</td>
+         <td>Value3</td>
+         <td>Value4</td>
+      </tr>
+   </table>
+{%endblock%}

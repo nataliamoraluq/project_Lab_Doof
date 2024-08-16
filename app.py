@@ -6,6 +6,8 @@ from bson.objectid import ObjectId
 app = Flask(__name__, template_folder="./templates")
 
 # --- LIST ---
+examsByCategory = [] # filtered by
+examsBySample = [] # filtered by
 
 #LIST - INDICATIONS
 @app.route("/indications", methods=["GET"])
@@ -38,9 +40,7 @@ def addIndication():
             'codeIndic' : codeIndic,
             'description' : description
         }
-
-        print("Indication: ", indication)
-
+        #print("Indication: ", indication)
         indicationCollection.insert_one(indication)
         indicaciones = indicationCollection.find()
         return render_template("listIndication.html.jinja", indicaciones=indicaciones)
@@ -83,7 +83,7 @@ def addCategory():
             'description' : description
         }
 
-        print("Category: ", category)
+        #print("Category: ", category)
 
         categoryCollection.insert_one(category)
         categorias = categoryCollection.find()
@@ -114,11 +114,11 @@ def deleteCategory(id):
     return render_template("listCategory.html.jinja", categorias=categorias)
 
 ## ### ---- ###
-@app.route("/showCategOptions", methods=["GET"])
-def sendCategory():
+@app.route("/filter", methods=["GET"])
+def filterExam():
     categorias = categoryCollection.find()
     indicaciones = indicationCollection.find()
-    return render_template("createExam.html.jinja", categorias=categorias, indicaciones=indicaciones)
+    #return render_template("createExam.html.jinja", categorias=categorias, indicaciones=indicaciones)
 
 # ---------------------------------- CRUD EXAM & SERVICES -------------------------------"
 ## *** ADD EXAM ***
@@ -127,28 +127,26 @@ def addExam():
     listCat = categoryCollection.find()
     listIndi = indicationCollection.find()
     if request.method == "POST":
-
-        name = request.form['examCode']
+        codeExam = request.form['examCode']
+        name = request.form['examName']
         categoriesX = request.form['categories']
         typeOfSample = request.form['typeOfSample']
         price = request.form['priceExam']
         indicationX = request.form['indications']
 
         exam = {
-            'name' : name,
+            'codeExam' : codeExam,
+            'name': name,
             'categoriesX' : categoriesX,
             'typeOfSample' : typeOfSample,
             'price' : price,
             'indicationX' : indicationX
         }
-
-        print("Exam: ", exam)
-
+        #print("Exam: ", exam)
         examServiceCollection.insert_one(exam)
         examenes = examServiceCollection.find()
         return render_template("listExam.html.jinja", examenes=examenes)
     return render_template("createExam.html.jinja", categoriasList=listCat, indicacionesList=listIndi)
-
 ## *** UPDATE EXAM ***
 @app.route("/updateS/<id>", methods=["GET", "POST"])
 def updateExam(id):
@@ -160,44 +158,16 @@ def updateExam(id):
         new_exam = request.form
         exam = examServiceCollection.replace_one({'_id': oid},
                                         {
-                                            'name' : new_exam['examCode'],
+                                            'codeExam' : new_exam['examCode'],
+                                            'name' : new_exam['examName'],
+                                            'categoriesX': new_exam['category'],
                                             'typeOfSample' : new_exam['typeOfSample'],
                                             'price' : new_exam['priceExam'],
+                                            'indication': new_exam['indication'],
                                         })
         return redirect(url_for('exams'))
         #'categoriesX' : new_exam['categories'], 'indicationX' : new_exam['indications'],
     return render_template("updateExam.html.jinja", examX=exam, categoriasList=listCat, indicacionesList=listIndi)
-
-
-
-##OJO!! PROBAR Y CORREGIR ESTO: EN EL UPDATEEXAM.HTML
-
-"""
-            <select name="categories" id="categoryOptions">
-                {% for c in categoriasList %}
-                    {%if c.name.value=={{examX.categoryX.value}}%}
-                        <option value="{{c.name}}".selected> {{c.name}}</option>
-                    {%endif%}
-                {% endfor %}
-            </select>
-            <div>
-                <label for="typeOfSample">Sample type: </label><br>
-                <input type="string" name="typeOfSample" placeholder="Type of sample here">
-                <br>
-            </div>
-            <div>
-                <label for="priceExam">Type of sample: </label><br>
-                <input type="string" name="priceExam" placeholder="Price "in Bs" ">
-                <br>
-            </div>
-            <label for="indication"> Indication: </label><br>
-            <select name="indications" id="indicationOptions">
-                {% for indiX in indicacionesList %}
-                    <option value="{{indiX.codeIndic}}"> {{indiX.codeIndic}}</option>
-                {% endfor %}
-            </select>
-"""
-
 ## *** DELETE EXAM ***
 @app.route("/deleteS/<id>", methods=["GET"])
 def deleteExam(id):

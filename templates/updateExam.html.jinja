@@ -5,13 +5,22 @@
         <form method="POST">
             <div>
                 <label for="examCode">Exam & Service Code: </label><br>
-                <input type="string" name="examCode" placeholder="Code here" value={{examX.name}}>
+                <input type="string" name="examCode" placeholder="Code here" value={{examX.codeExam}}>
                 <br>
             </div>
-            <label for="category">Category: </label><br>
-            <select name="categories" id="categoryOptions">
+            <div>
+                <label for="examName">Exam Name: </label><br>
+                <input type="string" name="examName" placeholder="Name in here" value={{examX.name}}>
+                <br>
+            </div>
+            <label for="categories">Category: </label><br>
+            <select name="category" id="categoryOptions">
                 {% for c in categoriasList %}
-                    <option value="{{c.name}}"> {{c.name}}</option>
+                    {%if c.name==examX.indicationX%}
+                        <option value="{{c.name}}" selected> {{c.name}}</option>
+                    {%else%}
+                        <option value="{{c.name}}"> {{c.name}}</option>
+                    {%endif%}
                 {% endfor %}
             </select>
             <div>
@@ -21,13 +30,17 @@
             </div>
             <div>
                 <label for="priceExam">Type of sample: </label><br>
-                <input type="string" name="priceExam" placeholder="Price "in Bs" value={{examX.price}}">
+                <input type="string" name="priceExam" placeholder="Price .-in Bs-." value={{examX.price}}>
                 <br>
             </div>
-            <label for="indication"> Indication: </label><br>
-            <select name="indications" id="indicationOptions">
+            <label for="indications"> Indication: </label><br>
+            <select name="indication" id="indicationOptions">
                 {% for indiX in indicacionesList %}
-                    <option value="{{indiX.codeIndic}}"> {{indiX.codeIndic}}</option>
+                    {%if indiX.description==examX.indicationX%}
+                        <option value="{{indiX.description}}" selected> {{indiX.codeIndic}}</option>
+                    {%else%}
+                        <option value="{{indiX.description}}" selected> {{indiX.codeIndic}}</option>
+                    {%endif%}
                 {% endfor %}
             </select>
             <input id="btnUpdateE" type="submit" value="Update">
