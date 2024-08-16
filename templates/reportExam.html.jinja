@@ -1,0 +1,25 @@
+{% extends 'base.html.jinja' %}
+{% block contentBase %}
+    <div id="examInfoDetailed">
+        <h1> {% block title %} Exam & Service Report: {% endblock %}</h1>
+        <ul>
+            <li>
+                <h3> How many exams existed with each category>: </h3>
+                <p>{{x.x}}</p>
+            </li>
+            <li>
+                <h3> Which is the most common Indication?: </h3>
+                <p>{{mostCommonIndic.code}}</p>
+                <p>{{mostCommonIndic.description}}</p>
+            </li>
+            <li>
+                <h3> Exams quantity filter by price range: </h3>
+                <p>1 - 100bs{{intervalE.x}}</p>
+                <p>101 - 200bs{{intervalE.x}}</p>
+                <p>201 - 300bs{{intervalE.x}}</p>
+                <p>301 - 500bs{{intervalE.x}}</p>
+                <p>501 and more{{intervalE.x}}</p>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

@@ -198,6 +198,58 @@ def showCatalogue():
         #
     return render_template("catalogueExam.html.jinja", categorias=categories, exams=examFiltList)
 # SEE REPORT
+@app.route("/report", methods=["GET"])
+def showReport():
+    countIndic= 0
+    countEbyC = 0
+
+    #
+
+    #
+
+    categNewList = [] 
+    top = 0 
+    mostCommonIndic = {}
+
+    intervalE = {
+        'first':0,
+        'second':0,
+        'third':0,
+        'fourth':0,
+        'fifth':0,
+    }
+    # ---- EXAMS BY PRICE RANGES (0 TO 500+) ----
+    for exam in examServiceCollection.find(): 
+        if exam['price'] <= 100: 
+            intervalE['first'] += 1 
+        elif exam['price'] <= 200: 
+            intervalE['second'] += 1 
+        elif exam['price'] <= 300: 
+            intervalE['third'] += 1 
+        elif exam['price'] <= 500: 
+            intervalE['fourth'] += 1 
+        elif exam['price'] > 500: 
+            intervalE['fifth'] += 1 
+ 
+    for indic in indicationCollection.find(): 
+        i = 0 
+        for examX in examServiceCollection.find(): 
+            if examX['indicationX'] == indic['description']: 
+                i += 1 
+        if i > top: 
+            top = i 
+            mostCommonIndic = {'code': indic['name'], 'description': indic['description']}  
+
+    for cat in categoryCollection.find(): 
+        i = 0 
+        for exam in examServiceCollection.find(): 
+            if exam['category'] == cat['name']: 
+                i += 1 
+        categNewList.append({'name': cat['name'], 'num': str(i)}) 
+
+    #
+    return render_template("reportExam.html.jinja", categorias=categories, exams=examFiltList)
+
 
 if __name__ == "__main__":
     app.run(debug=True)
