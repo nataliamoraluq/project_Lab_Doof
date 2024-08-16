@@ -1,0 +1,32 @@
+{% extends 'base.html.jinja' %}
+{% block contentBase %}
+    <div id="examInfoDetailed">
+        <h2> {% block title %} Exam & Service Detailed: {% endblock %}</h3>
+        <ul>
+            <li>
+                <h4> Code: </h4>
+                <p>{{examen.codeExam}}</p>
+            </li>
+            <li>
+                <h4> Name:</h4>
+                <p>{{examen.name}}</p>
+            </li>
+            <li>
+                <h4> Category:</h4>
+                <p>{{examen.categoriesX}}</p>
+            </li>
+            <li>
+                <h4> Sample type:</h4>
+                <p>{{examen.typeOfSample}}</p>
+            </li>
+            <li>
+                <h4> Indications:</h4>
+                <p>{{examen.indicationsX}}</p>
+            </li>
+            <li>
+                <h4> Price:</h4>
+                <p>{{examen.price}} Bs</p>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

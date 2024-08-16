@@ -44,6 +44,24 @@ table, th, td {
     justify-content: center;
 }
 
+#filterOptions form{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    width:auto;
+    height: -webkit-fill-available;
+}
+
+.examTable{
+    padding: 0;
+    width:80%;
+    text-align: center;
+}
+
+.examTable a{
+    padding: 0;
+}
+
 h4{
     margin: 0%;
 }

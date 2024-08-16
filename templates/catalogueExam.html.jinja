@@ -3,18 +3,21 @@
    <h1>{% block title %} Exams & Services Catalogue: {% endblock %}</h1>
    <div id="filterOptions">
       <h4> Filter By: </h4>
-      <label> Category:</label>
-      <select name="categoryFilter">
-         {% for c in categorias %}
-            <option value="{{c.name}}"> {{c.name}}</option>
-         {%endfor%}
-      </select>
-      <label> Sample type:</label>
-      <input type="string" name="sampleFilter" placeholder="Sample type">
-      <input id="btnFilter" type="submit" value="Filter">
+      <form action="/filter" method="POST"> 
+         <label> Category:</label>
+         <select name="categoryFilter">
+               <option value=""> Select a category</option>
+            {% for c in categorias %}
+               <option value="{{c.name}}"> {{c.name}}</option>
+            {%endfor%}
+         </select>
+         <label> Sample type:</label>
+         <input type="text" name="sampleFilter" placeholder="Sample type">
+         <input id="btnFilter" type="submit" value="Filter">
+      </form>
    </div>
-   <table style="width:100%">
-      <tr>
+   <table class="examTable">
+      <tr name="tableHeaders">
          <th>Exam Code</th>
          <th>Exam Name</th>
          <th>Sample type</th>
@@ -22,12 +25,13 @@
          <th>Consult here</th>
       </tr>
       {%for filtered in exams%}
-         <tr name="row1">
+         <tr name="rowInfo">
             <td>{{filtered.codeExam}}</td>
             <td>{{filtered.name}}</td>
             <td>{{filtered.typeOfSample}}</td>
             <td>{{filtered.price}}</td>
             <td>
+               <a href="/detailedServ/{{filtered._id}}">Consult this</a>
                <a href="/updateS/{{filtered._id}}">Update</a>
                <a href="/deleteS/{{filtered._id}}">Delete</a>
             </td>

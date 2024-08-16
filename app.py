@@ -167,30 +167,36 @@ def deleteExam(id):
     examenes = examServiceCollection.find()
     return render_template("listExam.html.jinja", examenes=examenes)
 
-## ### ---- ###
-@app.route("/filter", methods=["GET"])
+## *** DETAILED EXAM ***
+@app.route("/detailedServ/<id>", methods=["GET"])
+def getExam(id):
+    oid = ObjectId(id)
+    serviceX = examServiceCollection.find_one({'_id': oid})
+    return render_template("detailedExam.html.jinja", examen=serviceX)
+
+## ### ---- FILTERS - SPECIFIC LIST - (CATALOGUE & REPORT) ###
+# CONSULT CATALOGUE
+@app.route("/filter", methods=["GET", "POST"])
 def showCatalogue():
     categories = categoryCollection.find()
-    catfilter = request.args.get('categoryFilter')
-    samplefilter = request.args.get('sampleFilter')
-    #
-    if catfilter:
-        examFiltList = examServiceCollection.find({'categoriesX': catfilter})
+    if request.method == "POST":
+        catfilter = request.form.get('categoryFilter')
+        samplefilter = request.form.get('sampleFilter')
+        print("Filtro categoria: ", catfilter, "Sample filter: ", samplefilter)
+        
+        examFiltList = examServiceCollection.find({'categoriesX': catfilter, 'typeOfSample': samplefilter})
+        print("Exams list: ", examFiltList)
+        if catfilter:
+            examFiltList = examServiceCollection.find({'categoriesX': catfilter})
+        elif samplefilter:
+            #examFiltList = [exam for exam in examFiltList if exam['typeOfSample'] == samplefilter]
+            examFiltList = examServiceCollection.find({'typeOfSample': samplefilter})
+        else:
+            examFiltList = examServiceCollection.find()
     else:
         examFiltList = examServiceCollection.find()
-    #
-    if samplefilter:
-        examFiltList = [exam for exam in examFiltList if exam['typeOfSample'] == samplefilter]
-
+        #
     return render_template("catalogueExam.html.jinja", categorias=categories, exams=examFiltList)
-
-#<a href="/updateS/{{filtered._id}}">Consult this</a>
-
-
-#LIST - EXAMS GENERAL
-# CRUD EXAMS --
-
-# CONSULT CATALOGUE
 # SEE REPORT
 
 if __name__ == "__main__":
