@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://i.redd.it/grmu4umzy7c51.png">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css"/>
-    <title>Document</title>
+    <title> Doofenshmirtz "Evil" Lab Inc. </title>
 </head>
 <body>
     <nav id="navBarOptions">
@@ -12,6 +13,7 @@
         <a href="{{url_for('categories')}}"> Categories</a> 
         <a href="{{url_for('exams')}}"> Exams & Services</a>
         <a href="{{url_for('showCatalogue')}}"> See Catalogue</a>
+        <a href="{{url_for('showReport')}}"> See Report</a>
     </nav>
     {% for message in get_flashed_messages()  %}
         <p style="color: red; font-weight: 600">{{ message }}</p>

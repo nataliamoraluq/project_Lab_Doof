@@ -1,14 +1,19 @@
 /* CSS MANUAL SOLO PROVISIONAL!! - MOMENTANEO MIENTRAS SE IMPORTAN LAS LIBRERIAS DE CSS*/
+@import url("https://fonts.googleapis.com/css?family=Alexandria");
+@import url('https://fonts.googleapis.com/css?family=Angkor');
+
 a{
     text-decoration: none;
     width: 55%;
     height: 2em;
     padding: 1rem;
     font-size: 1.15em;
+    color: azure;
+    font-family: Alexandria;
     font-weight: bold;
-    background-color: rgb(163, 191, 251);
+    background-color: rgb(80, 189, 206);
     border: 2px;
-    border-radius: 8%;
+    border-radius: 22vmax;
     align-content: center;
 }
 

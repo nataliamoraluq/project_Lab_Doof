@@ -200,17 +200,11 @@ def showCatalogue():
 # SEE REPORT
 @app.route("/report", methods=["GET"])
 def showReport():
-    countIndic= 0
-    countEbyC = 0
-
     #
-
-    #
-
     categNewList = [] 
     top = 0 
     mostCommonIndic = {}
-
+    #
     intervalE = {
         'first':0,
         'second':0,
@@ -220,17 +214,17 @@ def showReport():
     }
     # ---- EXAMS BY PRICE RANGES (0 TO 500+) ----
     for exam in examServiceCollection.find(): 
-        if exam['price'] <= 100: 
+        if float(exam['price']) <= 100: 
             intervalE['first'] += 1 
-        elif exam['price'] <= 200: 
+        elif float(exam['price']) <= 200: 
             intervalE['second'] += 1 
-        elif exam['price'] <= 300: 
+        elif float(exam['price']) <= 300: 
             intervalE['third'] += 1 
-        elif exam['price'] <= 500: 
+        elif float(exam['price']) <= 500: 
             intervalE['fourth'] += 1 
-        elif exam['price'] > 500: 
+        elif float(exam['price']) > 500: 
             intervalE['fifth'] += 1 
- 
+    # ---- MOST COMMON INDICATION ----
     for indic in indicationCollection.find(): 
         i = 0 
         for examX in examServiceCollection.find(): 
@@ -238,17 +232,16 @@ def showReport():
                 i += 1 
         if i > top: 
             top = i 
-            mostCommonIndic = {'code': indic['name'], 'description': indic['description']}  
-
+            mostCommonIndic = {'code': indic['codeIndic'], 'description': indic['description']}  
+    # ---- EXAMS REGISTERED IN EACH CATEGORY ----
     for cat in categoryCollection.find(): 
         i = 0 
         for exam in examServiceCollection.find(): 
-            if exam['category'] == cat['name']: 
+            if exam['categoriesX'] == cat['name']: 
                 i += 1 
         categNewList.append({'name': cat['name'], 'num': str(i)}) 
-
     #
-    return render_template("reportExam.html.jinja", categorias=categories, exams=examFiltList)
+    return render_template("reportExam.html.jinja", categNewList=categNewList, intervalE=intervalE, mostCommonIndic=mostCommonIndic)
 
 
 if __name__ == "__main__":
