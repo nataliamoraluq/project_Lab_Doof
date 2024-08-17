@@ -2,12 +2,17 @@
 @import url("https://fonts.googleapis.com/css?family=Alexandria");
 @import url('https://fonts.googleapis.com/css?family=Angkor');
 
+html{
+    /*font-family: Alexandria;*/
+    font-family:'Atkinson Hyperlegible', sans-serif;
+}
+
 a{
     text-decoration: none;
     width: 55%;
     height: 2em;
     padding: 1rem;
-    font-size: 1.15em;
+    font-size: 1.02em;
     color: azure;
     font-family: Alexandria;
     font-weight: bold;
@@ -16,6 +21,20 @@ a{
     border-radius: 22vmax;
     align-content: center;
 }
+
+.user_info{
+    background-color: rgb(177, 163, 244);
+    border-radius: 1.7em;
+    height: 5%m;
+    width: 20%;
+    padding: 1em;
+    margin: 1em;
+    border: 1.2em;
+    /*display: flex;
+    justify-content: center;*/
+    align-items: center;
+}
+
 
 form{
     display: flex;
@@ -47,6 +66,53 @@ table, th, td {
     flex-direction: row;
     align-items: center;
     justify-content: center;
+}
+
+.mainPage{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#sectionOne{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.8rem;
+    width: 40vmax;
+    height: 20vmax;
+    background-color: rgb(175, 157, 234);
+}
+
+#sectionOne img{
+    padding: 0;
+    width: 36vmax;
+    height: 20vmax;
+    position: relative;
+}
+
+#sectionOne a{
+    text-decoration: none;
+    background-color: rgb(118, 99, 180);;
+    padding: 0;
+    margin: 1%;
+    
+}
+
+#navBarOptions, #navBarMain{
+    background-color: rgb(80, 189, 206);
+    display: flex;
+    width: 90vmax;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    /*border-radius: 15vmax;*/
+}
+
+#navBarOptions a{
+    font-size: 1.5em;
 }
 
 #filterOptions form{

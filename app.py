@@ -2,8 +2,12 @@
 from flask import Flask, redirect, request, render_template, url_for, flash
 from db import userCollection, indicationCollection, categoryCollection, examServiceCollection
 from bson.objectid import ObjectId
+#from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 ##
 app = Flask(__name__, template_folder="./templates")
+
+"""login_manager = LoginManager()
+login_manager.init_app(app)"""
 
 # --- LIST ---
 examFiltList = [] #filtered list
@@ -26,9 +30,59 @@ def exams():
     examenes = examServiceCollection.find()
     return render_template("listExam.html.jinja", examenes=examenes)
 
+#START - MAIN PAGE
+@app.route("/main", methods=["GET"])
+def showMain():
+    return render_template("mainPage.html.jinja")
+
+#START - BASE
+@app.route("/", methods=["GET"])
+def showBase():
+    return render_template("base.html.jinja")
+"""
+# ------------ LOGGIN & REGISTER (SADLY NOR WORKING)------------------
+
+@app.route("/login", methods=["GET", "POST"])
+def logginUser():
+    if request.method == "POST":
+        username = request.form['username']
+        password = request.form['password']
+
+        user = userCollection.find_one({'username': username, 'password': password})
+        if user:
+            flash('Welcome!', 'message')
+            return render_template("base.html.jinja")
+        else:
+            flash('Error! Invalid username or password', 'error')
+    return render_template("logginUser.html.jinja")
+
+
+@app.route("/register", methods=["GET", "POST"])
+def registerUser():
+    if request.method ==  "POST":
+
+        user = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+
+        if user: 
+            if email:
+                if password:
+                    userX = {
+                        "username": user,
+                        "email": email,
+                        "password": password
+                    }
+                    userCollection.insert_one(userX)
+                    return redirect(url_for('logginUser'))
+        else:
+            flash('Err0r, fill data to complete', 'error')
+    return render_template('registerUser.html.jinja')
+
+"""
 # ---------------------------------- CRUD INDICATIONS -------------------------------
 ## *** CREATE INDICATION ***
-@app.route("/", methods=["GET", "POST"])
+@app.route("/indicationC", methods=["GET", "POST"])
 def addIndication():
     if request.method == "POST":
 
@@ -243,16 +297,84 @@ def showReport():
     #
     return render_template("reportExam.html.jinja", categNewList=categNewList, intervalE=intervalE, mostCommonIndic=mostCommonIndic)
 
+@app.route("/video", methods=["GET"])
+def showVideo():
+    return render_template("videoBase.html.jinja")
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
 
 
 """
-     <!--
-            <a href="{{ url_for('categories') }}"> Categories</a>
-            <a href="{{ url_for('exams') }}"> Exams & Services</a>
-            <a href="{{ url_for('showCatalogue') }}"> Consult catalogue</a>
-            <a href="{{ url_for('showReport') }}"> See Report</a>
-        -->
+    from collections import Counter
+from flask import Flask, request, render_template, flash, redirect, url_for
+from db import examCollection, userCollection, categoryCollection, indicationCollection
+from bson.objectid import ObjectId
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from random import randint
+from collections import defaultdict
+
+app = Flask(__name__, template_folder="./templates")
+app.config['SECRET_KEY'] = "twiceot9"
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+class User(UserMixin):
+    pass
+
+@login_manager.user_loader
+def load_user(user_id):
+    user = userCollection.find_one({'_id': ObjectId(user_id)})
+    if user:
+        user_obj = User()
+        user_obj.id = str(user['_id'])
+        return user_obj
+    return None
+
+#Initial page
+@app.route("/", methods=["GET"])
+def showHome():
+    return render_template("home.html.jinja")
+
+#User login and register
+@app.route("/register", methods=["GET", "POST"])
+def registerF():
+    if request.method ==  "POST":
+
+        user = request.form['username']
+        pw = request.form['password']
+
+        user = {
+            "username": user,
+            "password": pw
+        }
+        
+        userCollection.insert_one(user)
+        return redirect(url_for('loginF'))
+    return render_template('userRegister.html.jinja')
+
+@app.route("/login", methods=["GET", "POST"])
+def loginF():
+    if request.method == "POST":
+        username = request.form['username']
+        password = request.form['password']
+
+        user = userCollection.find_one({'username': username, 'password': password})
+        if user:
+            user_obj = User()
+            user_obj.id = str(user['_id'])
+            login_user(user_obj)
+            return redirect(url_for('showMenu'))
+        else:
+            flash('Invalid username or password', 'error')
+
+    return render_template("login.html.jinja")
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('showMainPage'))
 """

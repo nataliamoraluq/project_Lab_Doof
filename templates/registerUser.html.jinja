@@ -1,0 +1,26 @@
+{% extends 'mainPage.html.jinja' %}
+{% block contentMain %} 
+    <form class="user_register">
+        <p id="userMessage">Fill with ur data to sign up </p>
+        <div id="userName">
+            <label id="username">Username:</label>
+            <input type="text" name="username">
+            <br>
+        </div>
+        <div id="userEmail">
+            <label id="useremail">Email:</label>
+            <input type="text" name="email">
+            <br>
+        </div>
+        <div id="userPassword">
+            <label id="password">Password:</label>
+            <input type="password" name="password">
+            <br>
+        </div>
+        <input id="btnLoggin" type="submit" value="Loggin">     
+    </form>
+    <div id="toRegister">
+        <p id="access_message">Are you new here? Sign up to start</p>
+        <a href="{{ url_for('registerUser')}}"> Sign up</a>
+    </div>
+{% endblock %}

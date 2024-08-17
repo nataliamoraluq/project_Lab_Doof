@@ -4,7 +4,9 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> Lab Doofenshmirtz </title>
+        <link rel="icon" href="https://i.redd.it/grmu4umzy7c51.png">
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css"/>
+        <title> Doofenshmirtz "Evil" Lab Inc. </title>
     </head>
     <body>
         <nav id="navBarMain">
@@ -14,6 +16,12 @@
         {% for message in get_flashed_messages()  %}
             <p style="color: red; font-weight: 600">{{ message }}</p>
         {% endfor %}
+        <div class="mainPage">
+            <div id="sectionOne">
+                <a href=""><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRu5o8zOK4UQCK3Udzc17IoSAK8sAS01XgKlw&s.png" id="img3"/></a>
+            </div>
+            
+        </div>
         <div class="contentMainBlock">
             {% block contentMain %} {% endblock %}
         </div>

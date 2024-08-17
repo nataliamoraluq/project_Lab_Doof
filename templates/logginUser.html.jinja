@@ -1,10 +1,10 @@
 {% extends 'mainPage.html.jinja' %}
 {% block contentMain %} 
     <form class="user_info">
-        <p id="userMessage">Fill with ur data to loggin </p>
+        <p id="userMessage">Fill with ur data to login </p>
         <div id="userName">
-            <label id="userName">Username:</label>
-            <input type="text" name="useremail">
+            <label id="username">Username:</label>
+            <input type="text" name="username">
             <br>
         </div>
         <div id="userPassword">
@@ -15,8 +15,8 @@
         <input id="btnLoggin" type="submit" value="Loggin">     
     </form>
     <div id="toRegister">
-        <p id="access_message">Are you new here? Sign up to start</p>
-        <a href="{{ url_for('registerUser')}}"> Sign up</a>
+        <p id="access_message">You have an account? Sign in here </p>
+        <a href="{{ url_for('logginUser')}}"> Login</a>
     </div>
 {% endblock %}
         
