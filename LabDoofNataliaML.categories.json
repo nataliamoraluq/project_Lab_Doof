@@ -1,0 +1,14 @@
+[{
+  "_id": {
+    "$oid": "66bcd83c3aad796046c63eff"
+  },
+  "name": "CAT-1-idk-Bibble",
+  "description": "im a category guuuuurl"
+},
+{
+  "_id": {
+    "$oid": "66bd05a50c9ffb3a5225c55e"
+  },
+  "name": "analisis hemoglobina",
+  "description": "ns cosos de hemoglobina"
+}]

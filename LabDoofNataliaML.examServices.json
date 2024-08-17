@@ -1,0 +1,22 @@
+[{
+  "_id": {
+    "$oid": "66c00ad1492be24c3772d34f"
+  },
+  "codeExam": "EXAM2",
+  "name": "Glicemia basal",
+  "categoriesX": "analisis hemoglobina",
+  "typeOfSample": "ns sangre roja",
+  "price": "1000",
+  "indicationX": "1 - jkdfjdjk, 2- kfkkv f, 3- dcvfd, 4 -, fvkjgfkjfj"
+},
+{
+  "_id": {
+    "$oid": "66c00af1492be24c3772d350"
+  },
+  "codeExam": "EXAM1",
+  "name": "glicemia postpandrial",
+  "categoriesX": "analisis hemoglobina",
+  "typeOfSample": "ola",
+  "price": "150",
+  "indicationX": "1 - jkdfjdjk, 2- kfkkv f, 3- dcvfd, 4 -, fvkjgfkjfj"
+}]
